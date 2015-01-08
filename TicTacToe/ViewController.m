@@ -21,32 +21,41 @@
 @property (weak, nonatomic) IBOutlet UILabel *whichPlayerLabel;
 @property BOOL foundLabel;
 
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
 }
 
 
 - (IBAction)onLabelTapped:(UITapGestureRecognizer *)sender {
     CGPoint point = [sender locationInView:self.view];
 
-    NSArray *labels = [NSArray arrayWithObjects:self.labelOne, self.labelTwo, self.labelThree, self.labelFour, self.labelFive, self.labelSix, self.labelSeven, self.labelEight, self.labelNine, nil];
+   NSArray *labels = [NSArray arrayWithObjects:self.labelOne, self.labelTwo, self.labelThree, self.labelFour, self.labelFive, self.labelSix, self.labelSeven, self.labelEight, self.labelNine, nil];
 
-    for (int i = 0; i < 9; i++) {
-        UILabel *label = [UILabel new];
-        label = labels[i];
+    for (UILabel *label in labels) {
 
         if (CGRectContainsPoint(label.frame, point)) {
+            label.text = self.whichPlayerLabel.text;
 
-            label.text = @"w";
+            if ([self.whichPlayerLabel.text isEqualToString: @"o"]) {
+                self.whichPlayerLabel.text = @"x";
+
+            }
+
+            if ([self.whichPlayerLabel.text isEqualToString:@"x"]) {
+                self.whichPlayerLabel.text = @"o";
+            }
         }}
+
 
 }
 
-//-(void)findLabelUsingPoint:(CGPoint)point {
+
 @end
 
 

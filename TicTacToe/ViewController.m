@@ -32,31 +32,21 @@
 
 - (IBAction)onLabelTapped:(UITapGestureRecognizer *)sender {
     CGPoint point = [sender locationInView:self.view];
-    NSLog(@"%f", point.x);
 
-    if (CGRectContainsPoint(self.labelOne.frame, point)) {
-
-        NSLog(@"Label 1");
-    }
-    else {
-        ;
-    }
-
-    if (self.foundLabel == NO) {
-        NSLog(@"bob");
-    }
+    NSArray *labels = [NSArray arrayWithObjects:self.labelOne, self.labelTwo, self.labelThree, self.labelFour, self.labelFive, self.labelSix, self.labelSeven, self.labelEight, self.labelNine, nil];
 
     for (int i = 0; i < 9; i++) {
-        NSLog(@"Katie");
-    }
+        UILabel *label = [UILabel new];
+        label = labels[i];
+
+        if (CGRectContainsPoint(label.frame, point)) {
+
+            label.text = @"w";
+        }}
 
 }
 
--(void)findLabelUsingPoint:(CGPoint)point {
-
-}
-
-
-
-
+//-(void)findLabelUsingPoint:(CGPoint)point {
 @end
+
+

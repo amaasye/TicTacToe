@@ -63,11 +63,12 @@
         }
 
         NSString *whoWon = [NSString new];
+
         if ([self.labelOne.text isEqualToString:@"x"] &&
             [self.labelTwo.text isEqualToString:@"x"] &&
             [self.labelThree.text isEqualToString:@"x"])
         {
-            whoWon =@"x";
+            self.whoWon =@"x";
         }
 
         if ([self.labelOne.text isEqualToString:@"o"] &&
@@ -175,13 +176,24 @@
             whoWon =@"o";
         }
 
-        if ([whoWon isEqualToString:@"x"] || [whoWon isEqualToString:@"o"])
+        if ([whoWon isEqualToString:@"x"]) {
+            UIAlertView *winnerAlert = [[UIAlertView alloc] initWithTitle:@"Winner!" message:[NSString stringWithFormat:@"Player %@ won the game!", whoWon] delegate:self cancelButtonTitle:@"Play Again?" otherButtonTitles: nil];
+            [winnerAlert show];
+        }
+
+        if ([whoWon isEqualToString:@"o"]) {
+            UIAlertView *winnerAlert = [[UIAlertView alloc] initWithTitle:@"Winner!" message:[NSString stringWithFormat:@"Player %@ won the game!", whoWon] delegate:self cancelButtonTitle:@"Play Again?" otherButtonTitles: nil];
+            [winnerAlert show];
+        }
+
+     /*   if ([whoWon isEqualToString:@"x"] || [whoWon isEqualToString:@"o"])
         {
             UIAlertView *winnerAlert = [[UIAlertView alloc] initWithTitle:@"Winner!" message:[NSString stringWithFormat:@"Player %@ won the game!", whoWon] delegate:self cancelButtonTitle:@"Play Again?" otherButtonTitles: nil];
             [winnerAlert show];
 
             
         }
+      */
     }
 
 }
@@ -198,83 +210,6 @@
 }
 
         
-
-        //Determines winner
- /*       NSString *whoWon = [NSString new];
-        if ([self.labelOne.text isEqualToString:self.labelTwo.text]
-            && [self.labelTwo.text isEqualToString:self.labelThree.text])
-        {
-            whoWon = self.labelOne.text;
-        }
-
-        if ([self.labelFour.text isEqualToString:self.labelFive.text]
-            && [self.labelFive.text isEqualToString:self.labelSix.text])
-        {
-            whoWon = self.labelFour.text;
-        }
-
-        if ([self.labelSeven.text isEqualToString:self.labelEight.text]
-            && [self.labelEight.text isEqualToString:self.labelNine.text])
-        {
-            whoWon = self.labelSeven.text;
-        }
-
-        if ([self.labelOne.text isEqualToString:self.labelFour.text]
-            && [self.labelFour.text isEqualToString:self.labelSeven.text])
-        {
-            whoWon = self.labelOne.text;
-        }
-
-        if ([self.labelTwo.text isEqualToString:self.labelFive.text]
-            && [self.labelFive.text isEqualToString:self.labelEight.text])
-        {
-            whoWon = self.labelTwo.text;
-        }
-
-        if ([self.labelThree.text isEqualToString:self.labelSix.text]
-            && [self.labelSix.text isEqualToString:self.labelNine.text])
-        {
-            whoWon = self.labelThree.text;
-        }
-
-        if ([self.labelOne.text isEqualToString:self.labelFive.text]
-            && [self.labelFive.text isEqualToString:self.labelNine.text])
-        {
-            whoWon = self.labelOne.text;
-        }
-
-        if ([self.labelThree.text isEqualToString:self.labelFive.text]
-            && [self.labelFive.text isEqualToString:self.labelSeven.text])
-        {
-            whoWon = self.labelThree.text;
-        }
-
-        //Ask Rich about alert controller
-        if ([whoWon isEqualToString:@"x"] || [whoWon isEqualToString:@"o"])
-        {
-            UIAlertView *winnerAlert = [[UIAlertView alloc] initWithTitle:@"Winner!" message:[NSString stringWithFormat:@"Player %@ won the game!", whoWon] delegate:self cancelButtonTitle:@"Play Again?" otherButtonTitles: nil];
-            [winnerAlert show];
-
-
-        }
-
-*/
-
-
-/*
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-
-
-    if (buttonIndex == [alertView cancelButtonIndex]) {
-
-        NSArray *labels = [NSArray arrayWithObjects:self.labelOne, self.labelTwo, self.labelThree, self.labelFour, self.labelFive, self.labelSix, self.labelSeven, self.labelEight, self.labelNine, nil];
-        for (UILabel *label in labels) {
-            label.text = self.whichPlayerLabel.text;
-            self.whichPlayerLabel.text = @"";
-            }
-    }
-}
-*/
 
 
 

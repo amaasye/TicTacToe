@@ -192,9 +192,7 @@
 
     if (buttonIndex == [alertView cancelButtonIndex]) {
         for (UILabel *label in self.labels) {
-            label.text = self.whoWon;
-            self.whoWon = @"";
-
+            label.text = @"";
         }
     }
 }

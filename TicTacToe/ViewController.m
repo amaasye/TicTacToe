@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelEight;
 @property (weak, nonatomic) IBOutlet UILabel *labelNine;
 @property (weak, nonatomic) IBOutlet UILabel *whichPlayerLabel;
+@property NSArray *labels;
+@property NSString *whoWon;
 
 @end
 
@@ -26,6 +28,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.labels = [NSArray arrayWithObjects:self.labelOne, self.labelTwo, self.labelThree, self.labelFour, self.labelFive, self.labelSix, self.labelSeven, self.labelEight, self.labelNine, nil];
+    self.whichPlayerLabel.text = @"x";
+    if ([self.whichPlayerLabel.text  isEqual: @"x"]) {
+        self.whichPlayerLabel.textColor = [UIColor blueColor];
+    }
+    if ([self.whichPlayerLabel.text  isEqual: @"o"]) {
+        self.whichPlayerLabel.textColor = [UIColor redColor];
+    }
 }
 
 - (IBAction)onLabelTapped:(UITapGestureRecognizer *)sender {
@@ -42,66 +52,234 @@
                 label.text = self.whichPlayerLabel.text;
                 label.textColor = self.whichPlayerLabel.textColor;
             }
+            //Switches player whose turn it is
+            if ([self.whichPlayerLabel.text isEqualToString: @"o"]) {
+                self.whichPlayerLabel.text = @"x";
+                self.whichPlayerLabel.textColor = [UIColor blueColor];
+            } else {
+                self.whichPlayerLabel.text = @"o";
+                self.whichPlayerLabel.textColor = [UIColor redColor];
+            }
+        }
+
+        NSString *whoWon = [NSString new];
+        if ([self.labelOne.text isEqualToString:@"x"] &&
+            [self.labelTwo.text isEqualToString:@"x"] &&
+            [self.labelThree.text isEqualToString:@"x"])
+        {
+            whoWon =@"x";
+        }
+
+        if ([self.labelOne.text isEqualToString:@"o"] &&
+            [self.labelTwo.text isEqualToString:@"o"] &&
+            [self.labelThree.text isEqualToString:@"o"])
+        {
+            whoWon =@"o";
+        }
+
+        if ([self.labelFour.text isEqualToString:@"x"] &&
+            [self.labelFive.text isEqualToString:@"x"] &&
+            [self.labelSix.text isEqualToString:@"x"])
+        {
+            whoWon =@"x";
+        }
+
+        if ([self.labelFour.text isEqualToString:@"o"] &&
+            [self.labelFive.text isEqualToString:@"o"] &&
+            [self.labelSix.text isEqualToString:@"o"])
+        {
+            whoWon =@"o";
+        }
+
+        if ([self.labelSeven.text isEqualToString:@"x"] &&
+            [self.labelEight.text isEqualToString:@"x"] &&
+            [self.labelNine.text isEqualToString:@"x"])
+        {
+            whoWon =@"x";
+        }
+
+        if ([self.labelSeven.text isEqualToString:@"o"] &&
+            [self.labelEight.text isEqualToString:@"o"] &&
+            [self.labelNine.text isEqualToString:@"o"])
+        {
+            whoWon =@"o";
+        }
+
+        if ([self.labelOne.text isEqualToString:@"x"] &&
+            [self.labelFour.text isEqualToString:@"x"] &&
+            [self.labelSeven.text isEqualToString:@"x"])
+        {
+            whoWon =@"x";
+        }
+
+        if ([self.labelOne.text isEqualToString:@"o"] &&
+            [self.labelFour.text isEqualToString:@"o"] &&
+            [self.labelSeven.text isEqualToString:@"o"])
+        {
+            whoWon =@"o";
+        }
+
+        if ([self.labelTwo.text isEqualToString:@"x"] &&
+            [self.labelFive.text isEqualToString:@"x"] &&
+            [self.labelEight.text isEqualToString:@"x"])
+        {
+            whoWon =@"x";
+        }
+
+        if ([self.labelTwo.text isEqualToString:@"o"] &&
+            [self.labelFive.text isEqualToString:@"o"] &&
+            [self.labelEight.text isEqualToString:@"o"])
+        {
+            whoWon =@"o";
+        }
+
+        if ([self.labelThree.text isEqualToString:@"x"] &&
+            [self.labelSix.text isEqualToString:@"x"] &&
+            [self.labelNine.text isEqualToString:@"x"])
+        {
+            whoWon =@"x";
+        }
+
+        if ([self.labelThree.text isEqualToString:@"o"] &&
+            [self.labelSix.text isEqualToString:@"o"] &&
+            [self.labelNine.text isEqualToString:@"o"])
+        {
+            whoWon =@"o";
+        }
+
+        if ([self.labelOne.text isEqualToString:@"x"] &&
+            [self.labelFive.text isEqualToString:@"x"] &&
+            [self.labelNine.text isEqualToString:@"x"])
+        {
+            whoWon =@"x";
+        }
+
+        if ([self.labelOne.text isEqualToString:@"o"] &&
+            [self.labelFive.text isEqualToString:@"o"] &&
+            [self.labelNine.text isEqualToString:@"o"])
+        {
+            whoWon =@"o";
+        }
+
+        if ([self.labelThree.text isEqualToString:@"x"] &&
+            [self.labelFive.text isEqualToString:@"x"] &&
+            [self.labelSeven.text isEqualToString:@"x"])
+        {
+            whoWon =@"x";
+        }
+
+        if ([self.labelThree.text isEqualToString:@"o"] &&
+            [self.labelFive.text isEqualToString:@"o"] &&
+            [self.labelSeven.text isEqualToString:@"o"])
+        {
+            whoWon =@"o";
+        }
+
+        if ([whoWon isEqualToString:@"x"] || [whoWon isEqualToString:@"o"])
+        {
+            UIAlertView *winnerAlert = [[UIAlertView alloc] initWithTitle:@"Winner!" message:[NSString stringWithFormat:@"Player %@ won the game!", whoWon] delegate:self cancelButtonTitle:@"Play Again?" otherButtonTitles: nil];
+            [winnerAlert show];
+
+            
         }
     }
 
-    //Switches player whose turn it is
-    if ([self.whichPlayerLabel.text isEqualToString: @"o"]) {
-        self.whichPlayerLabel.text = @"x";
-        self.whichPlayerLabel.textColor = [UIColor blueColor];
-    } else {
-        self.whichPlayerLabel.text = @"o";
-        self.whichPlayerLabel.textColor = [UIColor redColor];
-    }
-
-    //Determines winner
-    NSString *whoWon = [NSString new];
-    if ([self.labelOne.text isEqualToString:self.labelTwo.text] && [self.labelTwo.text isEqualToString:self.labelThree.text]) {
-        whoWon = self.labelOne.text;
-    }
-
-    if ([self.labelFour.text isEqualToString:self.labelFive.text] && [self.labelFive.text isEqualToString:self.labelSix.text]) {
-        whoWon = self.labelFour.text;
-    }
-
-    if ([self.labelSeven.text isEqualToString:self.labelEight.text] && [self.labelEight.text isEqualToString:self.labelNine.text]) {
-        whoWon = self.labelSeven.text;
-    }
-
-    if ([self.labelOne.text isEqualToString:self.labelFour.text] && [self.labelFour.text isEqualToString:self.labelSeven.text]) {
-        whoWon = self.labelOne.text;
-    }
-
-    if ([self.labelTwo.text isEqualToString:self.labelFive.text] && [self.labelFive.text isEqualToString:self.labelEight.text]) {
-        whoWon = self.labelTwo.text;
-    }
-
-    if ([self.labelThree.text isEqualToString:self.labelSix.text] && [self.labelSix.text isEqualToString:self.labelNine.text]) {
-        whoWon = self.labelThree.text;
-    }
-
-    if ([self.labelOne.text isEqualToString:self.labelFive.text] && [self.labelFive.text isEqualToString:self.labelNine.text]) {
-        whoWon = self.labelOne.text;
-    }
-
-    if ([self.labelThree.text isEqualToString:self.labelFive.text] && [self.labelFive.text isEqualToString:self.labelSeven.text]) {
-        whoWon = self.labelThree.text;
-    }
-
-    //Ask Rich about alert controller
-    if ([whoWon isEqualToString:@"x"] || [whoWon isEqualToString:@"o"]) {
-        UIAlertView *winnerAlert = [[UIAlertView alloc] initWithTitle:@"Winner!" message:@"Somebody won" delegate:self cancelButtonTitle:@"Play Again?" otherButtonTitles: nil];
-        [winnerAlert show];
-    }
-
 }
 
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex != alertView.cancelButtonIndex) {
-        NSLog(@"Martha");
-    }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+
+
+    if (buttonIndex == [alertView cancelButtonIndex]) {
+        for (UILabel *label in self.labels) {
+            label.text = self.whoWon;
+            self.whoWon = @"";
+
+        }
+    }
 }
+
+        
+
+        //Determines winner
+ /*       NSString *whoWon = [NSString new];
+        if ([self.labelOne.text isEqualToString:self.labelTwo.text]
+            && [self.labelTwo.text isEqualToString:self.labelThree.text])
+        {
+            whoWon = self.labelOne.text;
+        }
+
+        if ([self.labelFour.text isEqualToString:self.labelFive.text]
+            && [self.labelFive.text isEqualToString:self.labelSix.text])
+        {
+            whoWon = self.labelFour.text;
+        }
+
+        if ([self.labelSeven.text isEqualToString:self.labelEight.text]
+            && [self.labelEight.text isEqualToString:self.labelNine.text])
+        {
+            whoWon = self.labelSeven.text;
+        }
+
+        if ([self.labelOne.text isEqualToString:self.labelFour.text]
+            && [self.labelFour.text isEqualToString:self.labelSeven.text])
+        {
+            whoWon = self.labelOne.text;
+        }
+
+        if ([self.labelTwo.text isEqualToString:self.labelFive.text]
+            && [self.labelFive.text isEqualToString:self.labelEight.text])
+        {
+            whoWon = self.labelTwo.text;
+        }
+
+        if ([self.labelThree.text isEqualToString:self.labelSix.text]
+            && [self.labelSix.text isEqualToString:self.labelNine.text])
+        {
+            whoWon = self.labelThree.text;
+        }
+
+        if ([self.labelOne.text isEqualToString:self.labelFive.text]
+            && [self.labelFive.text isEqualToString:self.labelNine.text])
+        {
+            whoWon = self.labelOne.text;
+        }
+
+        if ([self.labelThree.text isEqualToString:self.labelFive.text]
+            && [self.labelFive.text isEqualToString:self.labelSeven.text])
+        {
+            whoWon = self.labelThree.text;
+        }
+
+        //Ask Rich about alert controller
+        if ([whoWon isEqualToString:@"x"] || [whoWon isEqualToString:@"o"])
+        {
+            UIAlertView *winnerAlert = [[UIAlertView alloc] initWithTitle:@"Winner!" message:[NSString stringWithFormat:@"Player %@ won the game!", whoWon] delegate:self cancelButtonTitle:@"Play Again?" otherButtonTitles: nil];
+            [winnerAlert show];
+
+
+        }
+
+*/
+
+
+/*
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+
+
+    if (buttonIndex == [alertView cancelButtonIndex]) {
+
+        NSArray *labels = [NSArray arrayWithObjects:self.labelOne, self.labelTwo, self.labelThree, self.labelFour, self.labelFive, self.labelSix, self.labelSeven, self.labelEight, self.labelNine, nil];
+        for (UILabel *label in labels) {
+            label.text = self.whichPlayerLabel.text;
+            self.whichPlayerLabel.text = @"";
+            }
+    }
+}
+*/
+
+
+
 
 
 

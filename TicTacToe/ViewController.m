@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "WebViewController.h"
+
 
 @interface ViewController () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *labelOne;
@@ -21,6 +23,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *whichPlayerLabel;
 @property NSArray *labels;
 @property NSString *whoWon;
+@property UIControl *tapper;
+@property CGPoint originalCenter;
+
+
 
 @end
 
@@ -36,6 +42,8 @@
     if ([self.whichPlayerLabel.text  isEqual: @"o"]) {
         self.whichPlayerLabel.textColor = [UIColor redColor];
     }
+
+    self.originalCenter = self.whichPlayerLabel.center;
 }
 
 - (IBAction)onLabelTapped:(UITapGestureRecognizer *)sender {
@@ -47,11 +55,18 @@
     for (UILabel *label in labels) {
         if (CGRectContainsPoint(label.frame, point)) {
             NSString *canPlay = [NSString new];
+            //UILabel *labelPressed = [[UILabel alloc] initWithFrame:label.frame];
+            //[labelPressed setUserInteractionEnabled:NO];
+
+
             if ([label.text isEqualToString:canPlay]) {
                 //Marks the Player's move
                 label.text = self.whichPlayerLabel.text;
                 label.textColor = self.whichPlayerLabel.textColor;
+
             }
+
+
             //Switches player whose turn it is
             if ([self.whichPlayerLabel.text isEqualToString: @"o"]) {
                 self.whichPlayerLabel.text = @"x";
@@ -69,6 +84,7 @@
             [self.labelThree.text isEqualToString:@"x"])
         {
             self.whoWon =@"x";
+
         }
 
         if ([self.labelOne.text isEqualToString:@"o"] &&
@@ -176,7 +192,7 @@
             whoWon =@"o";
         }
 
-        if ([whoWon isEqualToString:@"x"]) {
+   /*   if ([whoWon isEqualToString:@"x"]) {
             UIAlertView *winnerAlert = [[UIAlertView alloc] initWithTitle:@"Winner!" message:[NSString stringWithFormat:@"Player %@ won the game!", whoWon] delegate:self cancelButtonTitle:@"Play Again?" otherButtonTitles: nil];
             [winnerAlert show];
         }
@@ -184,16 +200,8 @@
         if ([whoWon isEqualToString:@"o"]) {
             UIAlertView *winnerAlert = [[UIAlertView alloc] initWithTitle:@"Winner!" message:[NSString stringWithFormat:@"Player %@ won the game!", whoWon] delegate:self cancelButtonTitle:@"Play Again?" otherButtonTitles: nil];
             [winnerAlert show];
-        }
+        } */
 
-     /*   if ([whoWon isEqualToString:@"x"] || [whoWon isEqualToString:@"o"])
-        {
-            UIAlertView *winnerAlert = [[UIAlertView alloc] initWithTitle:@"Winner!" message:[NSString stringWithFormat:@"Player %@ won the game!", whoWon] delegate:self cancelButtonTitle:@"Play Again?" otherButtonTitles: nil];
-            [winnerAlert show];
-
-            
-        }
-      */
     }
 
 }
@@ -209,8 +217,67 @@
     }
 }
 
-        
+- (void)showWinnerAlert: (NSString *)whoWon {
+   UIAlertView *winnerAlert = [[UIAlertView alloc] init];
+    winnerAlert.delegate = self;
+        if ([whoWon isEqualToString:@"X"])
+            {winnerAlert.title = @"Player X Wins!";
+        } else if ([whoWon isEqualToString:@"O"])
+            {winnerAlert.title = @"Player O Wins!";}
+            else if ([whoWon isEqualToString:@"Tie!"])
+            {winnerAlert.title = @"Tie!";}
 
+    [winnerAlert addButtonWithTitle:@"Play Again?"];
+    [winnerAlert show];
+        
+}
+
+
+
+
+
+
+
+- (IBAction)onLabelDragged:(UIPanGestureRecognizer *)sender {
+    CGPoint point = [sender locationInView:self.view];
+    self.whichPlayerLabel.center = point;
+
+    for (UILabel *label in self.labels) {
+    
+    if (CGRectContainsPoint(label.frame, point) && [label.text isEqual: @""]){
+        label.text = self.whichPlayerLabel.text;
+
+    }
+        if (sender.state == UIGestureRecognizerStateEnded) {
+            [UIView animateWithDuration:1.0f animations:^{
+                self.whichPlayerLabel.center = self.originalCenter;
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    if ([self.whichPlayerLabel.text isEqualToString: @"o"]) {
+                        self.whichPlayerLabel.text = @"x";
+                        self.whichPlayerLabel.textColor = [UIColor blueColor];}
+                    else {
+                        self.whichPlayerLabel.text = @"o";
+                        self.whichPlayerLabel.textColor = [UIColor redColor];}
+                }
+            }];
+}
+}}
+
+//Doing the webview step now to get it out of the way
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)webSegue sender:(id)sender {
+    return YES;
+}
+
+- (IBAction)onHelpButtonPressed:(UIButton *)sender {
+    [self performSegueWithIdentifier: @"webSegue" sender:self];
+
+
+}
+
+-(IBAction)unwindAndReturn:(UIStoryboardSegue *)sender {
+    NSLog(@"Back Home");
+}
 
 
 

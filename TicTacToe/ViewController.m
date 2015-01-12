@@ -10,7 +10,7 @@
 #import "WebViewController.h"
 
 
-const int timerValue = 10;
+
 
 @interface ViewController () <UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *labelOne;
@@ -27,6 +27,9 @@ const int timerValue = 10;
 @property UIControl *tapper;
 @property CGPoint originalCenter;
 @property NSTimer *timer;
+@property int mainInt;
+@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+
 
 
 
@@ -46,18 +49,54 @@ const int timerValue = 10;
     }
 
     self.originalCenter = self.whichPlayerLabel.center;
+    [self startTimer];
+}
+
+-(void)startTimer {
+    self.mainInt = 10;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
+}
+
+-(void)countDown {
+    self.mainInt -= 1;
+    self.timerLabel.text = [NSString stringWithFormat:@"%i", self.mainInt];
+    if (self.mainInt == 0) {    
+        [self.timer invalidate];
+    }
+
+}
+
+-(void)resetTimer {
+    self.mainInt = 10;
+    [self countDown];
 }
 
 
 
+- (void)winnerAlert: (NSString *)winner {
+    UIAlertView *alertView = [[UIAlertView alloc] init];
+    alertView.delegate = self;
+    if ([winner isEqualToString:@"x"]) {
+        alertView.title = @"Player One Wins!";
+    } else if ([winner isEqualToString:@"o"]) {
+        alertView.title = @"Player Two Wins!";
+    } else if ([winner isEqualToString:@"Tie!"]) {
+        alertView.title = @"Tie!";
+    }
+    [alertView addButtonWithTitle:@"New Game?"];
+    [alertView show];
+
+}
+
 -(NSString *)whoWon {
-    NSString *winner;
+        NSString *winner;
 
     if ([self.labelOne.text isEqualToString:@"x"] &&
         [self.labelTwo.text isEqualToString:@"x"] &&
         [self.labelThree.text isEqualToString:@"x"])
     {
         winner =@"x";
+        
 
     }
 
@@ -172,6 +211,7 @@ const int timerValue = 10;
 
 - (IBAction)onLabelTapped:(UITapGestureRecognizer *)sender {
     CGPoint point = [sender locationInView:self.view];
+    [self resetTimer];
 
     //Enumerates through the array and checks to see if the point is in the label frame
     NSArray *labels = [NSArray arrayWithObjects:self.labelOne, self.labelTwo, self.labelThree, self.labelFour, self.labelFive, self.labelSix, self.labelSeven, self.labelEight, self.labelNine, nil];
@@ -195,7 +235,7 @@ const int timerValue = 10;
                     self.whichPlayerLabel.text = @"o";
                     self.whichPlayerLabel.textColor = [UIColor redColor];
                 }
-                [self whoWon];}
+                }
         }
 
 
@@ -218,21 +258,7 @@ const int timerValue = 10;
 
 
 
-/*- (void)winnerAlert: (NSString *)winner {
-   UIAlertView *winnerAlert = [[UIAlertView alloc] init];
-    winnerAlert.delegate = self;
-        if ([winner isEqualToString:@"x"])
-            {winnerAlert.title = @"Player X Wins!";
-        } else if ([winner isEqualToString:@"o"])
-            {winnerAlert.title = @"Player O Wins!";}
-            else if ([winner isEqualToString:@"Tie!"])
-            {winnerAlert.title = @"Tie!";}
 
-    [winnerAlert addButtonWithTitle:@"Play Again?"];
-    [self whoWon];
-    [winnerAlert show];
-        
-}*/
 
 
 
@@ -262,8 +288,8 @@ const int timerValue = 10;
 
             [UIView animateWithDuration:0.5f animations:^{
                 self.whichPlayerLabel.center = self.originalCenter;
-            } ];
-            [self whoWon];
+                [self resetTimer];} ];
+
     }
     } }
 

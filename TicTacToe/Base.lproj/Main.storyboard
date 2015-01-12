@@ -85,7 +85,7 @@
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="o" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1m-ez-ESq">
                                 <rect key="frame" x="133" y="387" width="55" height="55"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="33"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -94,9 +94,22 @@
                                     <outletCollection property="gestureRecognizers" destination="WMs-7T-p4f" appends="YES" id="zBV-Bt-LNf"/>
                                 </connections>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic Tac Toe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUC-Y7-HCl">
+                                <rect key="frame" x="34" y="47" width="253" height="69"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="Iu7-Ee-TGH"/>
+                                    <constraint firstAttribute="width" constant="253" id="tJy-nU-j0a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="50"/>
+                                <color key="textColor" red="1" green="0.65305101262371168" blue="0.1977851366586757" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4m-6C-GRu">
-                                <rect key="frame" x="137" y="473" width="32" height="30"/>
+                                <rect key="frame" x="121" y="491" width="78" height="30"/>
+                                <color key="backgroundColor" red="0.072342722040000002" green="0.57221422700000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="25"/>
                                 <state key="normal" title="Help">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -108,10 +121,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="iUC-Y7-HCl" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="27" id="HBC-uE-Ceh"/>
                             <constraint firstItem="E1X-e6-Jbi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="LyK-RP-KcK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="E1X-e6-Jbi" secondAttribute="trailing" constant="-16" id="bf8-sZ-uKZ"/>
                             <constraint firstItem="E1X-e6-Jbi" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="gmC-2j-e2S"/>
                             <constraint firstAttribute="bottomMargin" secondItem="E1X-e6-Jbi" secondAttribute="bottom" constant="-9" id="sAO-jK-f6J"/>
+                            <constraint firstAttribute="centerX" secondItem="iUC-Y7-HCl" secondAttribute="centerX" id="ufE-In-IKZ"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="XBK-7l-EbQ" appends="YES" id="46n-Oo-y5K"/>
@@ -156,14 +171,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5vy-hQ-mgJ">
-                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5vy-hQ-mgJ">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="OLp-2L-bbQ" id="CK6-hp-cHi"/>
                                 </connections>
                             </webView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oJr-TM-kna">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJr-TM-kna">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Tic-Tac-Toe" id="1bN-Nj-tI7">
@@ -184,6 +199,15 @@
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Snb-PG-c7H" firstAttribute="top" secondItem="5vy-hQ-mgJ" secondAttribute="bottom" id="OUS-9s-8We"/>
+                            <constraint firstItem="5vy-hQ-mgJ" firstAttribute="top" secondItem="oJr-TM-kna" secondAttribute="bottom" id="SJM-TI-467"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5vy-hQ-mgJ" secondAttribute="trailing" constant="-16" id="e70-sF-f5s"/>
+                            <constraint firstItem="oJr-TM-kna" firstAttribute="top" secondItem="F5L-OZ-FBe" secondAttribute="bottom" id="ePp-oS-0MD"/>
+                            <constraint firstItem="oJr-TM-kna" firstAttribute="leading" secondItem="bZZ-DA-f7S" secondAttribute="leading" id="fhR-6i-k2f"/>
+                            <constraint firstItem="5vy-hQ-mgJ" firstAttribute="leading" secondItem="bZZ-DA-f7S" secondAttribute="leadingMargin" constant="-16" id="lic-iK-gtF"/>
+                            <constraint firstAttribute="trailing" secondItem="oJr-TM-kna" secondAttribute="trailing" id="x4d-bp-ltc"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qYV-fx-slU">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="wzc-ok-CfX">
